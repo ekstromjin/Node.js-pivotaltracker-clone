@@ -1,0 +1,132 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <div style="overflow:hidden; margin-top:25px;">
+          <h2 class="pull-left no-margin">Projects</h2>
+          <button ng-show="loginUser.role==9" class="btn btn-info pull-right" data-target="#createproject" data-toggle="modal">Create Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="projects" id="project-lists">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="project-lists">
+            <div class="project" ng-repeat="project in current_projects">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="item">
+                    <img src="/assets/images/project.jpg" ng-show="project.photo_url == ''">
+                    <img src="{{ consts.photo_url.project+project._id+'/photo_url/'+project.photo_url }}" ng-show="project.photo_url != ''">
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <h2 class="project-title">
+                    <a class="project_link pull-left" ng-href="/#!/project/{{project.id}}">{{ project.title }}</a>
+                    <span class="project-status pull-right">Processing</span>
+                  </h2>
+                  <ul class="project-info">
+                    <li><i class="fa fa-calendar"></i> {{ project.startdate | date: 'yyyy-MM-dd' }}</li>
+                    <li>~</li>
+                    <li><i class="fa fa-calendar"></i> {{ project.enddate | date: 'yyyy-MM-dd' }}</li>
+                    <li><i class="fa fa-user"></i> {{ project.members.length }}</li>
+                  </ul>
+                  <h6>TL : {{ getFullName(filteredMembers[project.leader]) }}</h6>
+                </div>
+              </div>
+              <hr class="project-sep">
+            </div>
+          </div>
+          <pagination direction-links="false" total-items="projects_count" ng-model="current_page" boundary-links="true" class="pagination-sm" items-per-page="consts.project.per_page" ng-show="projects_count>consts.project.per_page"></pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="createproject" class="modal fade" role="modal">
+    	<div class="modal-dialog">
+      	<div class="modal-content">
+        		<div class="modal-header">
+        			<button class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title">Create New Project</h4>
+        		</div>
+        		<div class="modal-body">
+        			<form class="form create-project-form form" name="createProjectForm" enctype="muitipart/form-data">
+                <div class="row">
+                  <div class="col-md-6">
+                    <center class="form-group photo_url_form">
+                      <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                        </div>
+                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+                        </div>
+                        <div>
+                          <span class="btn-file">
+                            <span class="fileupload-new btn btn-primary">
+                              <i class="fa fa-paper-clip"></i> Select Image
+                            </span>
+                            <span class="fileupload-exists btn btn-warning">
+                              <i class="fa fa-undo"></i> Change
+                            </span>
+                            <input type="file" class="default project_photo_url" accept='image/*' ng-model="project_photo_url" onchange="angular.element(this).scope().uploadFile(this.files, 'photo_url')">
+                          </span>
+                          <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </center>
+                  <div class="col-md-5">
+                    <center class="form-group">
+                      <label>
+                        Specdoc
+                      </label>
+                      <input type="file" class="project_specdoc input-file form-control" accept='application/pdf' ng-model="project_specdoc" onchange="angular.element(this).scope().uploadFile(this.files, 'specdoc')" />
+                    </center>
+                    <center class="form-group">
+                      <label>
+                        Attached file
+                      </label>
+                      <input type="file" class="project_attached_file input-file form-control" ng-model="project_attached_file" accept='application/zip' onchange="angular.element(this).scope().uploadFile(this.files, 'attached_file')" />
+                    </center>
+                  </div>
+                </div>
+	          		<div class="form-group">
+	          			<input type="text" name="project_title" ng-model="project_title" class="form-control" required placeholder="Project Title" />
+                  <div ng-show="createProjectForm.$submitted || createProjectForm.project_title.$touched">
+                    <p class="text-error error" ng-show="createProjectForm.project_title.$error.required">This field is required!</p>
+                  </div>
+	          		</div>
+	          		<div class="form-group">
+	          			<div class="input-group date date-picker project-range input-daterange">
+	          				<input type="date" class="form-control" required name="project_startdate" ng-model="project_startdate" />
+	          				<span class="input-group-addon">To</span>
+	          				<input type="date" class="form-control" required name="project_enddate" ng-model="project_enddate" />
+	          			</div>
+                  <div ng-show="createProjectForm.$submitted || createProjectForm.project_startdate.$touched || createProjectForm.project_enddate.$touched">
+                    <p class="text-error error" ng-show="createProjectForm.project_startdate.$error.required || createProjectForm.project_enddate.$error.required">This field is required!</p>
+                  </div>
+	          		</div>
+	          		<div class="form-group private-member">
+          				<input type="hidden" name="project_members" ng-model="project_members" class="select2 form-control select2-offscreen select2-teammembers" onchange="angular.element(this).scope().changeMembers(this.value)" />
+          				<p class="text-error error display-hide">This field is required!</p>
+          			</div>
+                <div class="form-group team-leader">
+                  <input type="hidden" name="project_teamleader" ng-model="project_teamleader" class="select2 form-control select2-offscreen select2-teamleader" onchange="angular.element(this).scope().changeTeamleader(this.value)" />
+                  <p class="text-error error display-hide">This field is required!</p>
+                </div>
+                <div class="form-group repository">
+                  <input type="text" name="project_repository" ng-model="project_repository" class="form-control" placeholder="Project Repository">
+                </div>
+                <div class="form-action">
+                  <button type="submit" class="btn btn-info pull-right create_project_btn" ng-click="createProject()">Create</button>
+                </div>
+        			</form>
+  			    </div>
+    			<div class="modal-footer">
+    				
+        		</div>
+      	</div>
+    	</div>
+  </div>
+</section>

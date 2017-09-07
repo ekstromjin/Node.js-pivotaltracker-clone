@@ -1,0 +1,114 @@
+<div class="col-md-4 col-md-offset-4">
+	<div class="signup-form">
+		<form class="register-form" name="signupForm" data-enctype="multipart/form-data" method="post" novalidate>
+			<div class="form-content">
+				<div class="text-center">
+					<div class="icon-object signup-icon text-success border-success">
+						<i class="fa fa-plus"></i>
+					</div>
+					<h5 class="content-group-lg">
+						Create account
+						<small class="display-block">All fields are required</small>
+					</h5>
+				</div>
+				<p class="register-error display-hide text-error text-center">{{error}}</p>
+				<div class="form-group">
+					<div class="fileupload fileupload-new" data-provides="fileupload">
+						<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"></div>
+						<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+						<div>
+							<span class="btn-file">
+								<span class="fileupload-new btn btn-primary">
+									<i class="fa fa-paper-clip"></i> Select Image
+								</span>
+								<span class="fileupload-exists btn btn-warning">
+									<i class="fa fa-undo"></i> Change
+								</span>
+								<input type="hidden" name="profile_image" id="profile_image" ng-model="profile_image" value="">
+								<input type="file" name="avatar" id="avatar" accept="image/*">
+							</span>
+							<a href="#" ng-click="removeProfileImage()" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+						</div>
+					</div>
+				</div>
+				<div class="form-group has-feedback has-feedback-left">
+					<input type="text" name="firstname" class="form-control required" required ng-trim="false" placeholder="Your First Name" ng-model="firstname">
+					<div class="form-control-feedback">
+						<i class="fa fa-user text-muted"></i>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.firstname.$touched">
+						<p class="text-error required error" ng-show="signupForm.firstname.$error.required">This field is required.</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback has-feedback-left">
+					<input type="text" name="lastname" ng-model="lastname" class="form-control required" placeholder="Your Last Name" ng-trim="false" required>
+					<div class="form-control-feedback">
+						<i class="fa fa-user text-muted"></i>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.lastname.$touched">
+						<p class="text-error required" ng-show="signupForm.lastname.$error.required">This field is required.</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback has-feedback-left date date-picker" data-date="" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+					<input type="text" name="birthday" class="form-control" placeholder="Your Birthday" readonly="readonly" required ng-trim="false" ng-model="birthday">
+					<div class="form-control-feedback">
+						<button class="btn">
+							<i class="fa fa-calendar text-muted"></i>
+						</button>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.birthday.$touched">
+						<p class="text-error required" ng-show="signupForm.birthday.$error.required">This field is required.</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback has-feedback-left">
+					<input type="email" class="form-control required" name="emailaddress" placeholder="Your Email Address" ng-model="emailaddress" required ng-trim="false">
+					<div class="form-control-feedback">
+						<i class="fa fa-envelope text-muted"></i>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.emailaddress.$touched">
+						<p class="text-error required" ng-show="signupForm.emailaddress.$error.required">This field is required.</p>
+						<p class="validate-error error" ng-show="signupForm.emailaddress.$error.email">Insert your validate email.</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback has-feedback-left">
+					<input type="password" name="password" class="form-control required" placeholder="Your Password" ng-model="password" required ng-trim="false">
+					<div class="form-control-feedback">
+						<i class="fa fa-lock text-muted"></i>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.password.$touched">
+						<p class="text-error required" ng-show="signupForm.password.$error.required">This field is required.</p>
+					</div>
+				</div>
+				<div class="form-group has-feedback has-feedback-left">
+					<input type="password" name="repassword" class="form-control required" placeholder="Repassword" required ng-trim="false" ng-model="repassword">
+					<div class="form-control-feedback">
+						<i class="fa fa-check text-muted"></i>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.repassword.$touched">
+						<p class="text-error required" ng-show="signupForm.repassword.$error.required">This field is required.</p>
+					</div>
+					<div ng-show="signupForm.$submitted || signupForm.repassword.$touched">
+						<p ng-show="password!=repassword" class="error-password required error">Check your repassword.</p>
+					</div>
+		        </div>
+		        <div class="form-group">
+		        	<label class="radio-inline">
+		        		<input type="radio" name="gender" value="0" checked>
+		        		Male
+		        	</label>
+		        	<label class="radio-inline">
+		        		<input type="radio" name="gender" value="1">
+		        		Female
+		        	</label>
+		        </div>
+		        <div class="form-group">
+		        	<button class="btn bg-blue btn-block btn-register" ng-click="registerUser()">Register</button>
+		        </div>
+		        <div class="content-divider text-muted form-group">
+					<span>Have already account?</span>
+				</div>
+				<a href="/#!/" class="btn bg-slate btn-block content-group">Login</a>
+			</div>
+		</form>
+	</div>
+</div>

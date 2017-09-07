@@ -1,0 +1,69 @@
+<form class="update-profile-form" name="updateProfileForm" data-enctype="multipart/form-data" method="post" novalidate>
+	<div class="form-content">
+		<p class="update-profile-error display-hide text-error text-center">{{error}}</p>
+		<input type="hidden" id="user_id" name="user_id" value="{{loginUser._id}}" ng-trim="false">
+		<div class="form-group">
+			<div class="fileupload fileupload-new" data-provides="fileupload">
+				<div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+					<img src="uploads/user/{{user_id}}/{{profile_image}}" ng-if="profile_image" width="100%" height="100%">
+					<img src="assets/images/user.jpg" ng-if="!profile_image"  width="100%" height="100%">
+				</div>
+				<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+				</div>
+				<div>
+					<span class="btn-file">
+						<span class="fileupload-new btn btn-primary">
+							<i class="fa fa-paper-clip"></i> Select Image
+						</span>
+						<span class="fileupload-exists btn btn-warning">
+							<i class="fa fa-undo"></i> Change
+						</span>
+						<input type="hidden" name="profile_image" id="profile_image" ng-model="profile_image" value="{{loginUser.avatar}}">
+						<input type="file" name="avatar" id="avatar" accept="image/*">
+					</span>
+					<a href="#" ng-click="removeProfileImage()" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+				</div>
+			</div>
+		</div>
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="text" name="firstname" class="form-control required" required ng-trim="false" placeholder="Your First Name" ng-model="firstname">
+			<div class="form-control-feedback">
+				<i class="fa fa-user text-muted"></i>
+			</div>
+			<div ng-show="updateProfileForm.$submitted || updateProfileForm.firstname.$touched">
+				<p class="text-error required error" ng-show="updateProfileForm.firstname.$error.required">This field is required.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback has-feedback-left">
+			<input type="text" name="lastname" ng-model="lastname" class="form-control required" placeholder="Your Last Name" ng-trim="false" required>
+			<div class="form-control-feedback">
+				<i class="fa fa-user text-muted"></i>
+			</div>
+			<div ng-show="updateProfileForm.$submitted || updateProfileForm.lastname.$touched">
+				<p class="text-error required" ng-show="updateProfileForm.lastname.$error.required">This field is required.</p>
+			</div>
+		</div>
+		<div class="form-group has-feedback has-feedback-left date">
+			<input type="text" name="birthday" class="form-control  date-picker" placeholder="Your Birthday" readonly="readonly" required ng-trim="false" ng-model="birthday">
+			<div class="form-control-feedback">
+				<i class="fa fa-calendar text-muted"></i>
+			</div>
+			<div ng-show="updateProfileForm.$submitted || updateProfileForm.birthday.$touched">
+				<p class="text-error required" ng-show="updateProfileForm.birthday.$error.required">This field is required.</p>
+			</div>
+		</div>
+        <div class="form-group">
+        	<label class="radio-inline">
+        		<input type="radio" name="gender" value="0" checked>
+        		Male
+        	</label>
+        	<label class="radio-inline">
+        		<input type="radio" name="gender" value="1">
+        		Female
+        	</label>
+        </div>
+        <div class="form-group">
+        	<button class="btn bg-blue btn-block btn-register" ng-click="updateUser()">update</button>
+        </div>
+	</div>
+</form>

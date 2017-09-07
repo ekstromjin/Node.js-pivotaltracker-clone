@@ -1,0 +1,67 @@
+html(lang="en", xmlns:ng="http://angularjs.org")
+	head
+		meta(charset='utf8')
+		meta(http-equiv="X-UA-Compatible" content="IE=edge")
+		meta(content="width=device-width, initial-scale=1.0" name="viewport")
+		meta(content="" name="description")
+		meta(content="" name="author")
+		meta(name="MobileOptimized" content="320")
+		title 404
+		link(rel="stylesheet", href="/lib/bootstrap/css/bootstrap.min.css")
+		link(rel="stylesheet", href="/dist/css/pivotal.css")
+	body
+		div.page_header_container
+			header.tc_page_header.tc_page_header-ia.tc_page_header-expanded
+				ul.no-margin.list-unstyled.list-inline.nav-list
+					li
+						a.tc_header_item.tc_header_logo.tc_big_logo(href="/#!/")
+					li
+						h1.no-margin
+							span
+								span.tc_context_name
+									span.raw_context_name.project-title 
+										a(href="/#!/") #{title}
+		div.page-404-full-page
+			div.col-md-12.page-404
+				div.number 404
+				div.details
+					h3 Not Found Page
+					h4 
+						a(href="/") Go Home
+		div.page_footer_container
+			footer.tc_page_footer
+				div.copyright
+					div.container-fluid
+						div.row
+							div.col-md-8.col-xs-6
+								p
+									span 
+										| #{nowyear} &copy; 
+										a(href="#{officeurl}" target="_blank") #{officename}
+										| ALL rights Reserved.
+							div.col-md-4.col-xs-6
+								ul.social-footer
+									li
+										a(href="http://www.facebook.com" target="_blank")
+											i.fa.fa-facebook
+									li
+										a(href="http://www.google.com" target="_blank")
+											i.fa.fa-google-plus
+									li
+										a(href="http://www.twitter.com" target="_blank")
+											i.fa.fa-twitter
+									li
+										a(href="http://www.linkedin.com" target="_blank")
+											i.fa.fa-linkedin
+									li
+										a(href="http://www.skype.com" target="_blank")
+											i.fa.fa-skype
+									li
+										a(href="http://www.github.com" target="_blank")
+											i.fa.fa-github
+									li
+										a(href="http://www.youtube.com" target="_blank")
+											i.fa.fa-youtube
+									li
+										a(href="http://www.dropbox.com" target="_blank")
+											i.fa.fa-dropbox

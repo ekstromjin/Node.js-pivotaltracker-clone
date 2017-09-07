@@ -1,0 +1,71 @@
+/***
+Error Pages
+***/
+
+/* 404 page option #1 */
+
+html, body {
+  padding:0px;
+  margin:0px;
+}
+
+
+.page-404 {
+  width: calc(100%-200px);
+  text-align: center;
+  .number {
+    position: relative;
+    top: 35px;
+    display: inline-block;
+    letter-spacing: -10px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    line-height: 128px;
+    font-size: 128px;
+    font-weight: 300;
+    color: #7bbbd6;
+    text-align: right;
+  }
+  .details {
+    position: relative;
+    top: 20px;
+    margin-left: 40px;
+    display: inline-block;
+    padding-top: 0px;
+    text-align: left;
+    h3 {
+      font-size: 1.9em !important;
+    }
+    a {
+      color : #256188;
+      font-size: 0.9em;
+    }
+  }
+}
+
+
+
+
+/* 404 page option #2*/
+.page-404-full-page {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fafafa !important;
+  .page-404 {
+    margin-top: 25vh;
+  }
+}
+
+
+@media (max-width: 480px) { 
+
+  .page-404 .number,
+  .page-404 .details {
+    text-align: center;
+    margin-left: 0px;
+  }
+
+  .page-404-full-page .page-404 {
+    margin-top: 30px;
+  }
+}

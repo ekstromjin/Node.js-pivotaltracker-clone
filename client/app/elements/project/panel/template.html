@@ -1,0 +1,32 @@
+<div class="panel {{panelName}} read_only sortable" ng-class="{'visible' : panel_visible[panelName]==1}" id="{{panelName}}_panel" data-order="{{panelName}}">
+	<div class="container droppable tn-panel-wrapper">
+		<header class="tn-panel-header tn-panel-header-single">
+			<div class="tn-panel-header-inner tn-panel-header-single-inner">
+				<div class="tn-panel-header-close-area">
+					<a ng-click="closePanel(panelName)" class="close tn-close-btn" data-type="{{panelName}}" data-target="#{{panelName}}_panel">&times;</a>
+				</div>
+				<div class="tn-panel-header-title-area">
+					<div class="tn-panel-header-name">
+						<span>{{panelName}}</span>
+					</div>
+				</div>
+				<div class="tn-panel-header-actions-area">
+					<div class="dropdown">
+						<a class="panel-collapse" data-toggle="dropdown"><i class="fa fa-ellipsis-vertical"></i></a>
+						<ul class="dropdown-menu-right dropdown-menu">
+							<li><a class="expand-all" ng-click="openStoiresOnPanel(panelName)">Expand all stories</a> </li>
+							<li><a class="collapse-all" ng-click="closeStoiresOnPanel(panelName)">Collapse all stories</a> </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="items_container">
+			<element-story ng-if="panelName=='current'" data-story-id="{{story._id}}" ng-repeat="story in project.currentStories"></element-story>
+			<element-story ng-if="panelName=='mywork'" data-story-id="{{story._id}}" ng-repeat="story in project.myworkStories"></element-story>
+			<element-story ng-if="panelName=='backlog'" data-story-id="{{story._id}}" ng-repeat="story in project.backlogStories"></element-story>
+			<element-story ng-if="panelName=='test'" data-story-id="{{story._id}}" ng-repeat="story in project.testStories"></element-story>
+			<element-story ng-if="panelName=='done'" data-story-id="{{story._id}}" ng-repeat="story in project.doneStories"></element-story>
+		</div>
+	</div>
+</div>

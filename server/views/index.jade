@@ -1,0 +1,73 @@
+doctype html
+html.no-js(lang="")
+	head
+		title Pivotal(Node)
+		meta(charset="utf-8")
+		meta(viewport="device-width" init-scale="1.0")
+
+		link(rel="stylesheet", href="/lib/bootstrap/css/bootstrap.min.css")
+		link(rel="stylesheet", href="/lib/font-awesome/css/font-awesome.min.css")
+		link(rel="stylesheet", href="/lib/select2/select2.css")
+		link(rel="stylesheet", href="/lib/select2/select2_metro.css")
+		link(rel="stylesheet", href="/lib/bootstrap-datepicker/css/datepicker.css")
+		link(rel="stylesheet", href="/lib/bootstrap-daterangepicker/daterangepicker-bs3.css")
+		link(rel="stylesheet", href="/lib/bootstrap-fileupload/bootstrap-fileupload.css")
+		link(rel="stylesheet", href="/lib/gritter/css/jquery.gritter.css")
+
+		link(rel="stylesheet", href="/dist/css/pivotal.css")
+
+	body.project-bg(ng-app="pivotalApp")
+		div.container-fluid
+			div.row
+				div.normal.layouts.show.current_header_version-ia.basic-header.expanded_header
+					include header.jade
+					div.page_wrapper
+						div#page_content(ng-view ng-cloak)
+					include footer.jade
+
+		script(src="/socket.io/socket.io.js")
+
+		// Pivotal vendor
+		script(src="/dist/js/vendor.js")
+
+		script(src="/app/app.js")
+		script(src="/app/consts.js")
+
+		// Angular Controllers
+		script(src="/app/controllers/topbarController.js")
+		script(src="/app/controllers/projectsController.js")
+		script(src="/app/controllers/projectDetailController.js")
+
+		// Angular Services
+		script(src="/app/services/project.js")
+		script(src="/app/services/socket-io.js")
+		script(src="/app/services/user.js")
+
+		//Angular Directives
+		script(src="/app/directives/projectSearch.js")
+
+		//Angular Elements
+		script(src="/app/elements/project/sidebar/element.js")
+		script(src="/app/elements/project/panel/element.js")
+		script(src="/app/elements/project/story/element.js")
+		script(src="/app/elements/project/createstory/element.js")
+		script(src="/app/elements/project/task/element.js")
+		script(src="/app/elements/project/comment/element.js")
+		script(src="/app/elements/project/settings/element.js")
+		script(src="/app/elements/project/analytics/element.js")
+		script(src="/app/elements/project/members/element.js")
+		script(src="/app/elements/project/members/profile/element.js")
+		script(src="/app/elements/project/rating/element.js")
+		script(src="/app/elements/project/rating/member/element.js")
+		script(src="/app/elements/project/rating/sidebar/element.js")
+		script(src="/app/elements/project/rating/leader/element.js")
+		script(src="/app/elements/user/changepwd/element.js")
+		script(src="/app/elements/user/profile/element.js")
+
+		// Angular Filters
+		script(src="/app/filters/truncate.js")
+		script(src="/app/filters/ownernames.js")
+		script(src="/app/filters/objectid.js")
+		script(src="/app/filters/link.js")
+		script(src="/app/filters/name.js")
+		script(src="/app/filters/addtimestamp.js")

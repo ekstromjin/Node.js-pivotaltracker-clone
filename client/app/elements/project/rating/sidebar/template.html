@@ -1,0 +1,11 @@
+<div class="rating-sidebar">
+	<ul class="rating-sidebar-menu">
+		<li ng-repeat="story in project.unestimatedStories" ng-class="{'active': story._id == project.rating_story.story_id}">
+			<a>
+				<span class="title">{{ story.title }}</span>
+				<span class="start-rating-btn" ng-click="startRating(story._id)" ng-if="project.leader == loginUser._id"><i class="fa fa-play" ng-class="{'text-grey': project.rating_story != 'undefined', 'text-warning-600': project.rating_story == 'undefined'}"></i></span>
+				<span class="selected" ng-if="story._id == project.rating_story.story_id"></span>
+			</a>
+		</li>
+	</ul>
+</div>

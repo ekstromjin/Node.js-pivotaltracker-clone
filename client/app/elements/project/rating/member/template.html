@@ -1,0 +1,21 @@
+<div class="row" ng-if="project.rating_story!='undefined'">
+  <h2 class="story-title">
+    <a class="story-link" target="_blank" href="/project/show?id={{project._id}}&amp;story_id={{project.rating_story.story_id}}">Processing: Story001</a>
+  </h2>
+  <div id="estimated_content">
+    
+  </div>
+  <ul class="list-unstyled list-inline points-list" ng-class="{'select-point' : estimate_status}">
+      <li class="points-item " ng-repeat="point in [1,2,3,4,5,6,7,8]" ng-class="{'active' : estimate_status && point==estimated_point}">
+        <button ng-click="ratingPoint(project.rating_story.story_id, point, this)" name="button" type="button" class="btn evaluate-point point-{{point}}" ng-class="{'bg-grey': estimate_status && point!=estimated_point, 'bg-danger': !estimate_status || point==estimated_point}">
+          <img class="point-image" src="/assets/images/{{point}}.png" alt="{{point}}">
+        </button>
+      </li>
+  </ul>
+</div>
+<center class="loading-content" ng-if="project.rating_story=='undefined'">
+  <h2 class="help text-grey-300">
+    There is no started story...
+  </h2>
+  <span class="loading-rating"></span>
+</center>

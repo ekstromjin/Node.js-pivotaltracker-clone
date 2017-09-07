@@ -1,0 +1,35 @@
+<form class="change-password-form" method="post" name="changePasswordForm">
+	<div class="form-group has-feedback has-feedback-left">
+		<input type="password" class="form-control" name="current_password" ng-model="current_password" placeholder="Current password" ng-change="changeIncorrect()" required />
+		<div class="form-control-feedback">
+			<i class="fa fa-lock"></i>
+		</div>
+		<div ng-show="changePasswordForm.$submitted || changePasswordForm.current_password.$touched">
+			<p class="text-error error" ng-show="changePasswordForm.current_password.$error.required">This field is required!</p>
+		</div>
+		<p class="text-error error" ng-show="incorrect">Password is not correct!</p>
+	</div>
+	<div class="form-group has-feedback has-feedback-left">
+		<input type="password" class="form-control" name="new_password" ng-model="new_password" placeholder="New password" required />
+		<div class="form-control-feedback">
+			<i class="fa fa-lock"></i>
+		</div>
+		<div ng-show="changePasswordForm.$submitted || changePasswordForm.new_password.$touched">
+			<p class="text-error error" ng-show="changePasswordForm.new_password.$error.required">This field is required!</p>
+		</div>
+	</div>
+	<div class="form-group has-feedback has-feedback-left">
+		<input type="password" class="form-control" name="repassword" ng-model="repassword" placeholder="Retype password" required />
+		<div class="form-control-feedback">
+			<i class="fa fa-check"></i>
+		</div>
+		<div ng-show="changePasswordForm.$submitted || changePasswordForm.repassword.$touched">
+			<p class="text-error error" ng-show="changePasswordForm.repassword.$error.required">This field is required!</p>
+		</div>
+		<p class="text error error" ng-show="new_password != repassword">Password confirmation doesnt match!</p>
+	</div>
+	<div class="form-action">
+		<button class="btn btn-default bg-grey-300 pull-right btn-cancel" data-dismiss="modal">Cancel</button>
+		<button type="submit" class="btn btn-warning bg-pink-400 pull-right" ng-click="changePassword()">Change Password<i class="fa fa-chevron-circle-right"></i></button>
+	</div>
+</form>

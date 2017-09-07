@@ -1,0 +1,22 @@
+<div class="col-md-4 col-md-offset-4">
+	<form class="forgot-password-form" method="post" name="forgotPasswordForm" novalidate>
+		<div class="form-content">
+			<div class="text-center">
+				<div class="icon-object border-warning text-warning"><i class="fa fa-repeat"></i></div>
+				<h5 class="content-group">Password recovery <small class="display-block">We'll send you instructions in email</small></h5>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="email" name="useremail" ng-model="useremail" required ng-trim="false" class="form-control required" placeholder="Your Email Address">
+				<div class="form-control-feedback">
+					<i class="fa fa-envelope-o text-muted"></i>
+				</div>
+				<div ng-show="forgotPasswordForm.$submitted || forgotPasswordForm.useremail.$touched">
+					<p class="text-error required" ng-show="forgotPasswordForm.useremail.$error.required">This field is required.</p>
+					<p class="validate-error error" ng-show="forgotPasswordForm.useremail.$error.email">Insert your validate email.</p>
+				</div>
+			</div>
+
+			<button type="submit" class="btn bg-teal-400 btn-block" ng-click="submitEmail()">Reset password &nbsp;<i class="fa fa-arrow-right position-right"></i></button>
+		</div>
+	</form>
+</div>

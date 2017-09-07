@@ -1,0 +1,33 @@
+{
+    "application" : "Management Tool for Team Project",
+    "port": 8000,
+    "env": "development",
+    "instance": "TEAMSERVER",
+    "parallelProcessing": 5,
+    "domain": "http://localhost:8000",
+    "websocketsRestartCronTime": "0 */5 * * * *",
+    "site": {
+        "title": "Pothong River",
+        "officename": "Pothong River IT Co.",
+        "officeurl": "http://www.pothongriver.com/"
+        },
+    "db": {
+        "connection": "mongodb://192.168.1.1:27017/pivotal_dev",
+        "options": {
+        }
+    },
+    "cookie": {
+        "secure": false
+    },
+    "session": {
+        "key": "mySuperPuperKey",
+        "cookieDomain": ".pothongriver.com"
+    },
+    "api": {
+        "version": "v1",
+        "secure": true
+    },
+    "email": {
+        "username": "Pothongriver - TPS <teamserver@pothongriver.com>"
+    }
+}

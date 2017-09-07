@@ -1,0 +1,69 @@
+div.page_header_container(ng-controller="topbarController")
+	header.tc_page_header.tc_page_header-ia.tc_page_header-expanded
+		ul.no-margin.list-unstyled.list-inline.nav-list
+			li
+				a.tc_header_item.tc_header_logo.tc_big_logo(href="/#!/")
+			li
+				h1.no-margin(ng-class="{'sub-page-header' : detail_page==true}")
+					span
+						span.tc_context_name
+							span.raw_context_name.project-title(ng-show="index_page")
+								a(href="/#!/") #{site.title}
+							span.raw_context_name.project-title(ng-show="detail_page")
+								a(href="/#!/") {{project.title}}
+			li.tc_pull_right
+				div.tc_dropdown
+					a.tc_dropdown_name(data-toggle="dropdown" aria-expanded="false") {{loginUser.simple_name}}
+					ul.dropdown-menu.dropdown-menu-right(role="menu")
+						li
+							a.tc_header_item_name(data-toggle="modal" data-target="#update_profile_modal")
+								i.fa.fa-user
+								|  Profile
+						li
+							a.tc_header_item_name(data-toggle="modal" data-target="#change_password_modal")
+								i.fa.fa-lock
+								| &nbsp;Change password
+						li
+							a.tc_header_item_name(href="/logout")
+								i.fa.fa-key
+								|  Log out
+			li.tc_pull_right.tc_extra_wide
+				img.avatar-image(src="/dist/images/user.jpg" ng-show="loginUser.avatar==''")
+				img.avatar-image(src="/uploads/user/{{loginUser._id}}/{{loginUser.avatar | addTimestamp}}" ng-show="loginUser.avatar!=''")
+				#temp_img
+					img(style="display:none")
+			li.tc_pull_right(ng-show="index_page")
+				project-search.search_bar_container.next.menu
+		div.project_nav_expanded(ng-show="detail_page")
+			ul.nav.nav-tabs
+				li
+					a(data-toggle="tab" data-target="#stories") Stories
+				li
+					a(data-toggle="tab" data-target="#analytics" ng-click="initChartDraw()") Analytics
+				li(ng-show="loginUser.role == 9")
+					a(data-toggle="tab" data-target="#settings") Settings
+				li
+					a(data-toggle="tab" data-target="#members") Members
+				li(ng-if="loginUser.role != 9")
+					a(data-toggle="tab" data-target="#ratings") Ratings
+
+div#change_password_modal.modal.fade(role="dialog")
+	div.modal-dialog
+		div.modal-content
+			div.modal-header
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				h3.modal-title
+					| Change Password
+			div.modal-body
+				change-password-form
+			div.modal-footer
+div#update_profile_modal.modal.fade(role="dialog")
+	div.modal-dialog
+		div.modal-content
+			div.modal-header
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				h3.modal-title
+					| Profile
+			div.modal-body
+				update-profile-form
+			div.modal-footer

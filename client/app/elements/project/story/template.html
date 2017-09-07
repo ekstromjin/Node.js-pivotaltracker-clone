@@ -1,0 +1,143 @@
+<div class="item" id="story_{{story._id}}" data-storyid="{{story._id}}" ng-class="{'start': story.status == 0, 'finish': story.status == 1, 'expand': isExpand}">
+	<div class="item-header">
+		<div class="item-header-top">
+			<a class="item-collapse" ng-click="openAndCloseStory(story._id)">
+				<i class="fa" ng-class="{'fa-plus': !isExpand, 'fa-minus': isExpand}"></i>
+			</a>
+			<span class="story-feature" ng-if="story.type=='1'">
+				<i class="fa fa-star"></i>
+			</span>
+			<span class="story_id">{{ story._id }}</span>
+			<span class="story-actions pull-right">
+				<div ng-if="story.status == 0">
+					<label ng-hide="isMyStory()" class="start-label">Waitting</label>
+					<a class="story-status-btn start-button" ng-click="changeStatus(1)" ng-show="isMyStory()">Start</a>
+				</div>
+				<div ng-if="story.status == 1">
+					<label ng-hide="isMyStory()" class="finish-label">Processing</label>
+					<a class="story-status-btn finish-button" ng-click="changeStatus(2)" ng-show="isMyStory()">Finish</a>
+				</div>
+				<div ng-if="story.status == 2">
+					<label ng-hide="permission" class="test-label"></label>
+					<a class="story-status-btn accept-button" ng-click="changeStatus(4)" ng-show="permission">Accept</a>
+					<a class="story-status-btn reject-button" ng-click="changeStatus(3)" ng-show="permission">Reject</a>
+				</div>
+				<div ng-if="story.status == 3">
+					<a class="story-status-btn start-button" ng-click="changeStatus(1)" ng-show="isMyStory()">Start</a>
+				</div>
+			</span>
+		</div>
+		<div class="item-header-middle">
+			<p class="story-title">
+				<span class="story_title">
+					<i class="fa fa-file-text"></i>
+					{{ story.title }}
+				</span>
+			</p>
+		</div>
+		<div class="item-header-bottom">
+			<span class="user_email">
+				<i class="fa fa-user"></i>
+				{{story.members | ownerNames:project.tms}}
+			</span>
+			<span class="points" ng-if="story.points!=0">
+				Pts: <b>{{story.points}}</b>
+			</span>
+			<span class="points" ng-if="story.points==0">
+				Unestimate
+			</span>
+		</div>
+	</div>
+	<div class="item-body">
+		<div class="story">
+			<div class="story-title">
+				<div ng-hide="permission">
+					<!-- <label class="story-field">Title :</label> -->
+					<span class="story-value" ng-hide="permission">{{story.title}}</span>
+				</div>
+				<div ng-show="permission">
+					<!-- <label class="story-field">Title :</label> -->
+					<div class="story-title-actions pull-right">
+						<div class="story-title-edit" ng-hide="story_title.accept"><a class="active-edit" ng-click="story_title.accept=true"><i class="fa fa-pencil-square action-icon"></i></a></div>
+						<div class="story-title-action" ng-show="story_title.accept">
+							<a class="save-story" ng-click="saveStoryTitle()"><i class="fa fa-check-square action-icon"></i></a>
+							<a class="disable-edit" ng-click="cancelStoryTitle()"><i class="fa fa-ban action-icon"></i></a>
+						</div>
+					</div>
+					<input type="text" ng-model="story_title.text" class="form-control" ng-readonly="!story_title.accept" />
+					<p class="text-error error" ng-show="story_title.required">This field is required!</p>
+				</div>
+			</div>
+			<div class="input-id">
+				<ul>
+					<li><a title="Copy to clipboard!" data-clipboard-text="{{ clipboardUrl }}" ng-click="copyToClipboard(story._id)" id="{{story._id}}" class="clipboard link-story sri-modal-copy-btn"><i class="fa fa-link"></i></a></li>
+					<li><span>ID</span></li>
+					<li><span>{{ story._id }}</span></li>
+					<li ng-if="permission"><a ng-click="deleteStory()" class="delete_story"><i class="fa fa-trash-o"></i></a></li>
+				</ul>
+			</div>
+			<div class="story-info-table">
+				<table class="table table-condensed table-responsive">
+					<tbody>
+						<tr>
+							<td class="story-field" style="width: 78px;">Story Type</td>
+							<td class="story-value" ng-hide="permission">{{ story.type == '0' ? 'Normal' : 'Feature' }}</td>
+							<td class="story-value" ng-show="permission">
+								<select ng-model="story.type" ng-change="changeStory('type', story.type)">
+									<option value="0" ng-selected="story.type == 0">Normal</option>
+									<option value="1" ng-selected="story.type == 1">Feature</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="story-field">Points</td>
+							<td class="story-value" ng-hide="permission">{{ story.points == '0' ? 'Unestimate' : story.points }}</td>
+							<td class="story-value" ng-show="permission">
+								<select name="points" ng-model="story.points" ng-change="changeStory('points', story.points)">
+									<option value="0" ng-selected="story.points == 0">Unestimate</option>
+									<option value="{{n}}" ng-selected="story.points == n" ng-repeat="n in [1,2,3,4,5,6,7,8]">{{n}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="story-field">Requester</td>
+							<td class="story-value">{{ story.requester_name }}</td>
+						</tr>
+						<tr>
+							<td class="story-field">Owners</td>
+							<td class="story-value" ng-hide="permission">{{story.members | ownerNames:project.tms}}</td>
+							<td class="story-value" ng-show="permission">
+								<input type="text" ng-model="story.members" ng-change="changeStory('members', story.members)" class="story_members" ng-value="story.members">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="story-description">
+				<div ng-hide="permission">
+					<label class="story-field">Description :</label>
+					<p class="story-value description" ng-bind-html="story.description | link"></p>
+				</div>
+				<div ng-show="permission">
+					<label class="story-field">Description :</label>
+					<div class="story-description-actions pull-right">
+						<div class="story-description-edit" ng-hide="story_description.accept"><a class="active-edit" ng-click="story_description.accept=true"><i class="fa fa-pencil-square action-icon"></i></a></div>
+						<div class="story-description-action" ng-show="story_description.accept">
+							<a class="save-story" ng-click="saveStoryDescription()"><i class="fa  fa-check-square action-icon"></i></a>
+							<a class="disable-edit" ng-click="cancelStoryDescription()"><i class="fa fa-ban action-icon"></i></a>
+						</div>
+					</div>
+					<textarea class="form-control" ng-model="story_description.text" ng-readonly="!story_description.accept" rows="5"></textarea>
+					<p class="text-error error" ng-show="story_description.required">This field is required!</p>
+				</div>
+			</div>
+			<element-task></element-task>
+			<div class="story-comments-container">
+				<label class="story-field">Activity</label>
+				<div class="comment-block">
+					<create-activity-form></create-activity-form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

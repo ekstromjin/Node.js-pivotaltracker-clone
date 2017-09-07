@@ -1,0 +1,44 @@
+<div class="tab-content">
+	<!-- <div class="project-loading" ng-show="loadingFlag">
+		<div class="loader">
+			<div class="loading"></div>
+			<p class="text-center loading-text">Loading...</p>
+		</div>
+	</div> -->
+	<div class="preloader" ng-show="loadingFlag">
+		<div class="sk-rotating-plane"></div>
+		<div class="loading-text text-center">Loading...</div>
+	</div>
+	<div id="stories" class="tab-pane in active" ng-hide="loadingFlag">
+		<section class="main project">
+			<element-sidebar></element-sidebar>
+			<article class="main">
+				<section class="panels ui-sortable" data-scrollable="true">
+					<div class="table coulmn" style="width: 1047px;">
+						<element-panel data-panel-name="{{order}}" class="panel-element" ng-repeat="order in panel_orders"></element-panel>
+					</div>
+				</section>
+			</article>
+		</section>
+	</div>
+	<div id="analytics" class="tab-pane fade">
+		<element-project-analytics></element-project-analytics>
+	</div>
+	<div id="settings" class="tab-pane fade">
+		<div class="container settings-container">
+			<div class="row">
+				<div class="col-md-offset-3 col-md-6">
+					<h2 class="title text-center">Edit Project(Test)</h2>
+					<project-settings-form></project-settings-form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="members" class="tab-pane fade">
+		<element-member-list></element-member-list>
+	</div>
+	<div id="ratings" class="tab-pane fade">
+		<element-rating></element-rating>
+	</div>
+</div>
+<element-story-create></element-story-create>

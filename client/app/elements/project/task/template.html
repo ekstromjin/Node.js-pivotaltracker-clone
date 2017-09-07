@@ -1,0 +1,28 @@
+<div class="story-tasks-container">
+	<label class="story-field">Tasks</label>
+	<div class="task-block">
+		<form class="task-create-form" name="taskForm" accept-charset="UTF-8">
+			<div class="input-group">
+				<input class="form-control" type="text" name="task_title" ng-model="task_title">
+				<span class="input-group-btn">
+					<button name="button" ng-click="createTask(task_title, story._id, loginUser._id)" class="create-task-btn btn btn-xs input-icon bg-grey-700"><i class="fa fa-check"></i></button>
+				</span>
+			</div>
+		</form>
+		<table class="table table-condensed table-responsive tasks-table">
+			<tbody>
+				<tr ng-repeat="task in story.tasks" id="task_{{task._id}}">
+					<td>
+						<input type="checkbox" value="{{task.status}}" ng-model="status" ng-click="doneTask(task)" ng-disabled="disabled" ng-checked="{{task.status}}">
+					</td>
+					<td class="text-left task-title">{{task.title}}</td>
+					<td>
+						<a class="btn-delete-task" ng-click="deleteTask(task._id)">
+							<i class="fa fa-trash-o"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

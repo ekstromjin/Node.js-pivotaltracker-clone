@@ -1,0 +1,30 @@
+<div class="col-md-4 col-md-offset-4">
+	<form class="reset-password-form" method="post" name="resetPasswordForm" novalidate>
+		<div class="form-content">
+			<div class="text-center">
+				<div class="icon-object border-warning text-warning"><i class="fa fa-repeat"></i></div>
+				<h5 class="content-group">Password recovery <small class="display-block">We'll send you instructions in email</small></h5>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" name="password" ng-model="password" required class="form-control" placeholder="Reset password" />
+				<div class="form-control-feedback">
+					<i class="fa fa-lock text-muted"></i>
+				</div>
+				<div ng-show="resetPasswordForm.$submitted || resetPasswordForm.password.$touched">
+					<p class="text-error required" ng-show="resetPasswordForm.password.$error.required">This field is required.</p>
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<input type="password" name="repassword" ng-model="repassword" required class="form-control" placeholder="Retype your password" />
+				<div class="form-control-feedback">
+					<i class="fa fa-check text-muted"></i>
+				</div>
+				<div ng-show="resetPasswordForm.$submitted || resetPasswordForm.repassword.$touched">
+					<p class="text-error required" ng-show="resetPasswordForm.repassword.$error.required">This field is required.</p>
+				</div>
+				<p class="text error error" ng-show="password != repassword">Password confirmation doesnt match!</p>
+			</div>
+			<button type="submit" class="btn bg-teal-400 btn-block" ng-click="submitPassword()">Reset password &nbsp;<i class="fa fa-arrow-right position-right"></i></button>
+		</div>
+	</form>
+</div>

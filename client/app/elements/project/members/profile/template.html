@@ -1,0 +1,61 @@
+<div class="modal-header">
+	<button class="close" ng-click="closeModal()">&times;</button>
+	<h2 class="no-margin">{{ member | name:'full' }}'s Profile</h2>
+</div>
+<div class="modal-body member_profile">
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" data-target="#member_overview">Oveview</a></li>
+		<li><a data-toggle="tab" data-target="#member_projects">Projects</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="member_overview" class="tab-pane fade active in">
+			<div class="row">
+				<div class="col-sm-12">
+					<center>
+						<div class="item">
+							<img width="150" height="150" src="{{ consts.photo_url.user + member._id + '/' + member.avatar }}" alt="2050" ng-if="member.avatar!=''">
+							<img width="150" height="150" src="/assets/images/avatar.png" alt="2050" ng-if="member.avatar==''">
+						</div>
+					</center>
+				</div>
+				<div class="col-sm-6 col-sm-offset-3" style="margin-top: 20px;">
+					<h2 class="member-name"><a class="pull-left text-capitalize">{{ member | name:'full' }}</a></h2>
+					<ul class="member-info">
+						<li><i class="fa fa-envelope"></i> {{ member.emailaddress }}</li>
+					</ul>
+					<ul class="member-info">
+						<li><i class="fa fa-male" ng-if="member.gender == 0"></i><i class="fa fa-female" ng-if="member.gender == 1"></i></li>
+						<li><i class="fa fa-calendar"></i> {{ member.birthday }}</li>
+						<li><i class="fa fa-pinterest"></i> {{ projects.length }}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="member_projects" class="tab-pane fade">
+			<div class="project" ng-repeat="project in relatedProjects">
+              <div class="row no-margin">
+                <div class="col-md-3">
+                  <div class="item">
+                    <img src="/assets/images/project.jpg" ng-show="project.photo_url == ''">
+                    <img src="{{ consts.photo_url.project+project._id+'/photo_url/'+project.photo_url }}" ng-show="project.photo_url != ''">
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <h2 class="project-title">
+                    <a class="project_link pull-left" ng-click="linkToProject(project.id)">{{ project.title }}</a>
+                    <span class="project-status pull-right">Processing</span>
+                  </h2>
+                  <ul class="project-info">
+                    <li><i class="fa fa-calendar"></i> {{ project.startdate | date: 'yyyy-MM-dd' }}</li>
+                    <li>~</li>
+                    <li><i class="fa fa-calendar"></i> {{ project.enddate | date: 'yyyy-MM-dd' }}</li>
+                    <li><i class="fa fa-user"></i> {{ project.members.length }}</li>
+                  </ul>
+                  <h6>TL : {{ getFullName(filteredMembers[project.leader]) }}</h6>
+                </div>
+              </div>
+              <hr class="project-sep" ng-hide="$index == relatedProjects.length - 1">
+            </div>
+		</div>
+	</div>
+</div>

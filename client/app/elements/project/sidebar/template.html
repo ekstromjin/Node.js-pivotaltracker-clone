@@ -1,0 +1,86 @@
+<aside class="sidebar">
+	<div class="sidebar_wrapper">
+		<header class="sidebar_header">
+			<a class="toggle_sidebar" ng-click="toggleSidebar()"></a>
+		</header>
+		<section class="sidebar_content scrollable">
+			<section class="project">
+				<ul class="item settings_area">
+					<li class="project actions item">
+						<nav>
+							<a title="Stories Count" class="velocity"><span class="ng-binding">&nbsp;{{storiescount}}</span></a>
+							<a title="Project Members" class="members"><span class="ng-binding">&nbsp;{{project.tms.length}}</span></a>
+						</nav>
+					</li>
+				</ul>
+				<div class="panels">
+					<ul class="items split">
+						<li class="item add_story" ng-show="loginUser.role==consts.admin.role || project.leader == loginUser._id">
+							<a class="panel_toggle" data-toggle="modal" data-target="#addstory">
+								<span class="panel_name">add story</span>
+							</a>
+						</li>
+						<li class="item mywork" ng-class="{'visible': panel_visible['mywork']==1}" ng-click="openPanel('mywork')">
+							<div class="counter">{{myworkStoriesCount}}</div>
+							<a class="panel_toggle" data-target="#mywork_panel">
+								<span class="panel_name">My Work</span>
+							</a>
+						</li>
+						<li class="item current" ng-class="{'visible': panel_visible['current']==1}" ng-click="openPanel('current')">
+							<div class="counter">{{currentStoriesCount}}</div>
+							<a class="panel_toggle" data-target="#current_panel">
+								<span class="panel_name">Current</span>
+							</a>
+						</li>
+						<li class="item backlog" ng-class="{'visible': panel_visible['backlog']==1}" ng-click="openPanel('backlog')">
+							<div class="counter">{{backlogStoriesCount}}</div>
+							<a class="panel_toggle" data-target="#backlog_panel">
+								<span class="panel_name">Backlog</span>
+							</a>
+						</li>
+						<li class="item test" ng-class="{'visible': panel_visible['test']==1}" ng-click="openPanel('test')">
+							<div class="counter">{{testStoriesCount}}</div>
+							<a class="panel_toggle" data-target="#test_panel">
+								<span class="panel_name">Test</span>
+							</a>
+						</li>
+						<li class="item done"  ng-class="{'visible': panel_visible['done']==1}" ng-click="openPanel('done')">
+							<div class="counter">{{doneStoriesCount}}</div>
+							<a class="panel_toggle" data-target="#done_panel">
+								<span class="panel_name">Done</span>
+							</a>
+						</li>
+						<hr class="sidebar-sep">
+						<li class="item repository visible">
+							<span class="panel_toggle">
+								<span class="panel_name">
+									Repository Url: 
+									<span class="empty-file pull-right" ng-show="!project.repository_url">None</span>
+									<a title="{{ project.repository_url }}" ng-href="{{ project.repository_url }}" class="file-name pull-right text-success" target="_blank" ng-show="project.repository_url!=''">{{ project.repository_url | truncate:false:10 }}</a>
+								</span>
+							</span>
+						</li>
+						<li class="item spec visible">
+							<span class="panel_toggle">
+								<span class="panel_name">
+									Special Doc: 
+									<span class="empty-file pull-right" ng-show="project.specdoc==''">None</span>
+									<a title="{{project.specdoc}}" href="/uploads/project/{{project._id}}/specdoc/{{project.specdoc}}" class="file-name pull-right text-success" target="_blank" ng-show="project.specdoc!=''">{{project.specdoc | truncate:false:10}}</a>
+								</span>
+							</span>
+						</li>
+						<li class="item attach visible">
+							<span class="panel_toggle">
+								<span class="panel_name">
+									Attached: 
+									<span class="empty-file pull-right" ng-show="project.attached_file==''">None</span>
+									<a title="{{project.attached_file}}" href="/uploads/project/{{project._id}}/attached_file/{{project.attached_file}}" class="file-name pull-right text-success" ng-show="project.attached_file!=''">{{project.attached_file | truncate:false:10}}</a>
+								</span>
+							</span>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</section>
+	</div>
+</aside>

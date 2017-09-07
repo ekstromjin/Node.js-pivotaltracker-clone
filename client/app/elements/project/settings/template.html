@@ -1,0 +1,77 @@
+<form class="form update-project-form form" name="updateProjectForm" enctype="muitipart/form-data">
+  <div class="row">
+    <div class="col-md-6">
+      <center class="form-group photo_url_form">
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+          <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+            <img src="/assets/images/project.jpg" ng-show="project.photo_url == ''">
+            <img src="{{ consts.photo_url.project+project._id+'/photo_url/'+project.photo_url }}" ng-show="project.photo_url != ''">
+          </div>
+          <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+          </div>
+          <div>
+            <span class="btn-file">
+              <span class="fileupload-new btn btn-primary">
+                <i class="fa fa-paper-clip"></i> Select Image
+              </span>
+              <span class="fileupload-exists btn btn-warning">
+                <i class="fa fa-undo"></i> Change
+              </span>
+              <input type="file" class="default project_photo_url" accept='image/*' ng-model="project_photo_url" onchange="angular.element(this).scope().uploadFile(this.files, 'photo_url')">
+            </span>
+            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+          </div>
+        </div>
+      </div>
+    </center>
+    <div class="col-md-5">
+      <center class="form-group">
+        <label>
+          Specdoc
+        </label>
+        <input type="file" class="project_specdoc input-file form-control" accept='application/pdf' ng-model="project_specdoc" onchange="angular.element(this).scope().uploadFile(this.files, 'specdoc')" files="Url('uploads/project/{{id}}/specdoc/{{project_uploads['specdoc']}})"/>
+      </center>
+      <center class="form-group">
+        <label>
+          Attached file
+        </label>
+        <input type="file" class="project_attached_file input-file form-control" ng-model="project_attached_file" accept='application/zip' onchange="angular.element(this).scope().uploadFile(this.files, 'attached_file')" files="{{project_uploads['attached_file']}}"/>
+      </center>
+    </div>
+  </div>
+  <div class="form-group">
+    <input type="text" name="project_title" ng-model="project_title" class="form-control" required placeholder="Project Title" />
+    <div ng-show="createProjectForm.$submitted || createProjectForm.project_title.$touched">
+      <p class="text-error error" ng-show="createProjectForm.project_title.$error.required">This field is required!</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group project-range input-daterange">
+      <input type="text" class="form-control" required readonly="readonly" name="project_startdate" value="{{project_startdate}}" />
+      <span class="input-group-addon">To</span>
+      <input type="text" name="project_enddate" class="form-control date date-picker" data-date-start-date="{{project_startdate}}" placeholder="Your Birthday" readonly="readonly" required ng-trim="false" ng-model="project_enddate">
+    </div>
+    <div ng-show="createProjectForm.$submitted || createProjectForm.project_startdate.$touched || createProjectForm.project_enddate.$touched">
+      <p class="text-error error" ng-show="createProjectForm.project_startdate.$error.required || createProjectForm.project_enddate.$error.required">This field is required!</p>
+    </div>
+  </div>
+  <div class="form-group private-member">
+    <input type="hidden" name="project_members" ng-model="project_members" value="{{project_members}}" class="select2 form-control select2-offscreen select2-teammembers project_members" onchange="angular.element(this).scope().changeMembers(this.value)" />
+    <p class="text-error error display-hide">This field is required!</p>
+  </div>
+  <div class="form-group team-leader">
+    <input type="hidden" name="project_teamleader" ng-model="project_teamleader" class="select2 form-control select2-offscreen select2-teamleader" value="{{project_teamleader}}" onchange="angular.element(this).scope().changeTeamleader(this.value)" />
+    <p class="text-error error display-hide">This field is required!</p>
+  </div>
+  <div class="form-action">
+    <div class="pull-left col-md-9">
+      <div class="alert alert-success" id="projectUpdateResultSuc" style="display: none">
+        Success! Project was updated successfully.
+      </div>
+      <div class="alert alert-danger" id="projectUpdateResultErr" style="display: none">
+        Error! Failed to update project.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-info pull-right create_project_btn" ng-click="updateProject()">Update</button>
+  </div>
+</form>

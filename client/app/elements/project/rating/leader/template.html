@@ -1,0 +1,61 @@
+<center class="loading-content" ng-if="project.rating_story=='undefined'">
+  <h2 class="help text-grey-300">
+    There is no started story...
+  </h2>
+  <span class="loading-rating"></span>
+</center>
+<div ng-if="project.rating_story!='undefined'">
+	<div class="row">
+		<h2 class="story-title">
+			<a class="story-link" target="_blank" href="/#!/project/{{project._id}}/story/{{processing.story_id}}">Processing: {{project.stories[processing.story_id].title}}</a>
+		</h2>
+		<div ng-if="estimated_flag==true" id="estimated_content">
+			<div class="col-md-12">
+				<div id="average_content">
+					<div class="average_point">
+						<div class="pull-left expect-points-{{average}}"></div>
+						<div class="points-help pull-left">is the Average!</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<p class="error-point display-hide text-help">Please estimate the point from 1 to 8.</p>
+				<p class="error-required display-hide text-help">This field is required.</p>
+				<div class="input-group">
+					<input type="number" id="estimate_point" class="form-control" placeholder="Please estimate the point." min="1" max="8" value="">
+					<span class="input-group-addon">
+						<button class="btn btn-xs btn-estimate" ng-click="estimatePoint()">Estimate</button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12"><h3>Rating Room</h3></div>
+		<div class="col-md-12">
+			<ul class="rating-members">
+				<li class="rating-member" ng-repeat="tm in rating_members">
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<img ng-if="tm.avatar!=''" src="uploads/user/{{tm._id}}/{{tm.avatar}}" class="avatar-image">
+								{{tm.firstname}}&nbsp;{{tm.lastname}}
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="expect-points">
+								<div class="processing" ng-if="tm.rating_value!=0">
+									<div class="expect-points-{{tm.rating_value}}"></div>
+								</div>
+								<div class="wating" ng-if="tm.rating_value==0">
+									<span class="loading-points"></span>
+									<p class="text-center loading-text">Waiting...</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

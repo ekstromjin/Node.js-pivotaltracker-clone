@@ -1,0 +1,17 @@
+<div class="rating-container">
+	<div ng-if="project.unestimatedStories.length != 0">
+		<element-rating-sidebar></element-rating-sidebar>
+		<div class="rating-content" id="rating-content">
+			<div class="container-fluid">
+				<element-rating-member ng-if="loginUser.role==0 && loginUser._id!=project.leader"></element-rating-member>
+				<element-rating-leader ng-if="loginUser._id==project.leader"></element-rating-member>
+			</div>
+		</div>
+	</div>
+	<center class="loading-content" ng-if="project.unestimatedStories.length == 0">
+		<h2 class="help text-grey-300">
+		There are none of unestimated stories...
+		</h2>
+		<span class="loading-rating"></span>
+	</center>
+</div>
