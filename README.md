@@ -1,5 +1,5 @@
 # Pivotal
-Management Tool for Team Project -> This is an application over Pothongriver Platform
+Management Tool for Team Project -> This is an application over my Platform
 
 # Karma & Run
   1. Set environments variable 'PHANTOMJS_BIN'
