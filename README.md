@@ -1,14 +1,6 @@
 # Pivotal
 Management Tool for Team Project -> This is an application over my Platform
 
-# Karma & Run
-  1. Set environments variable 'PHANTOMJS_BIN'
-    'set PHANTOMJS_BIN=C:\Program Files\nodejs\node_modules\karma-phantomjs-launcher\node_modules\phantomjs\lib\phantom\bin\phantomjs.exe'
-  2. run 'node node_modules\karma\bin\karma start karma.conf.js'
-
-# Grunt & Run
-  1. run 'node node_modules\grunt-cli\bin\grunt'
-  
 # Directory Structure
     server/
       config/
